@@ -1,0 +1,9 @@
+#cloud-config
+bootcmd:
+  - "hostname eksworker-$INSTANCE_ID.${domain_name}"
+  - "sed -i \"1i$(curl -fs http://169.254.169.254/latest/meta-data/local-ipv4) eksworker-$INSTANCE_ID.${domain_name} eksworker-$INSTANCE_ID\" /etc/hosts"
+  - "sed -i -e '/HOSTNAME=/d' /etc/sysconfig/network"
+  - "echo \"HOSTNAME=eksworker-$INSTANCE_ID.${domain_name}\" >> /etc/sysconfig/network"
+  - "echo \"eksworker-$INSTANCE_ID\" > /etc/hostname"
+
+preserve_hostname: true

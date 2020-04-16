@@ -1,0 +1,9 @@
+- rolearn: ${eks_nodes_iam_role_arn}
+  username: system:node:{{EC2PrivateDNSName}}
+  groups:
+    - system:bootstrappers
+    - system:nodes
+- rolearn: ${eks_cluster_provisioner_iam_role_arn}
+  username: admin:{{`{{SessionName}}`}}
+  groups:
+    - system:masters
