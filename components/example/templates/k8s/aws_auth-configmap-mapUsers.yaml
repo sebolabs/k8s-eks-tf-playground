@@ -1,0 +1,5 @@
+%{ for iam_user_arn in split(",", iam_admin_users_arns) ~}
+- userarn: ${iam_user_arn}
+  groups:
+    - system:masters
+%{ endfor ~}
